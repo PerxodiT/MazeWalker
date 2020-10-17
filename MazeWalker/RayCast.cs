@@ -51,7 +51,7 @@ namespace MazeWalker
             int mx = dirX == 1 ? (int)px + 1 : (int)px; 
             int my = dirY == 1 ? (int)py + 1 : (int)py; 
 
-            float sideDistX = (mx - px) / cos_ang;
+            float sideDistX = Math.Abs(mx - px) / cos_ang;
             float deltaDistX = 1 / cos_ang;
             float distX;
             x = (int)((px + sideDistX * cos_ang) + (dirX * 0.001F));

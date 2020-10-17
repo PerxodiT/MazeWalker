@@ -41,12 +41,7 @@ namespace MazeWalker
         private void Draw()
         {
             g.Clear(Color.FromArgb(255, 0, 150, 255));
-            foreach (DictionaryEntry wall in Map.Walls)
-            {
-                g.FillRectangle(new SolidBrush((Color)wall.Value), ((Coord)wall.Key).x
-                    * Map.Tile, ((Coord)wall.Key).y * Map.Tile, Map.Tile, Map.Tile);
-            }
-            
+            Map.Draw(g);
             Player.Draw(g);
         }
 

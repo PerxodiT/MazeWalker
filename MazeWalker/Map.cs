@@ -50,6 +50,15 @@ namespace MazeWalker
             Console.WriteLine("Map init complete!");
         }
 
+        public void Draw(Graphics g)
+        {
+            foreach (DictionaryEntry wall in Walls)
+            {
+                g.FillRectangle(new SolidBrush((Color)wall.Value), ((Coord)wall.Key).x
+                    * Tile, ((Coord)wall.Key).y * Tile, Tile, Tile);
+            }
+        }
+
         static public Coord Coord(int x, int y)
         {
            return new Coord(x,y);

@@ -31,7 +31,8 @@ namespace MazeWalker
 
         public void Turn(double rot)
         {
-            a += rot * 0.1;
+            a += rot;
+            a = a % (Math.PI * 2);
             sin_a = Math.Sin(a);
             cos_a = Math.Cos(a);
         }
@@ -58,10 +59,10 @@ namespace MazeWalker
                     y = y + d * cos_a;
                     break;
                 case 'q':
-                    Turn(-10 * frame_time);
+                    Turn(-1 * frame_time);
                     break;
                 case 'e':
-                    Turn(10 * frame_time);
+                    Turn(1 * frame_time);
                     break;
             }
         }
@@ -77,13 +78,16 @@ namespace MazeWalker
                 (float)(x * c), (float)(y * c),
                 (float)((x + Math.Cos(a)) * c), (float)((y + Math.Sin(a)) * c));
 
-            for (double angle = a - Settings.Half_FOV;
+            
+            for (double angle = a - Settings.Half_FOV, i = 0;
                 angle < a + Settings.Half_FOV;
-                angle += Settings.deltaFOV)
+                angle += Settings.deltaFOV, i++)
             {
                 float dist = RayCast.Ray((float)x, (float)y, angle);
                 float rx = (float)(x + dist * Math.Cos(angle));
                 float ry = (float)(y + dist * Math.Sin(angle));
+
+                if (i % 3 == 0)
                 g.DrawLine(Pens.Red, (float)(x * c), (float)(y * c), rx * c, ry * c);
             }
         }

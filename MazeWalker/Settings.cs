@@ -14,7 +14,7 @@ namespace MazeWalker
 
 
 
-        public const double RAY_COUNT = 400;
+        public const double RAY_COUNT = 800;
         public const double FOV = Math.PI / 3;
         public const double Half_FOV = FOV / 2;
         public const double deltaFOV = FOV / RAY_COUNT;
