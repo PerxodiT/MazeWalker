@@ -25,14 +25,15 @@ namespace MazeWalker
 
         public Map()
         {
-            Bitmap map_image = new Bitmap("Recources//Map.png");
+            Walls = new Dictionary<Coord, Color> { };
+            Bitmap map_image = new Bitmap(Properties.Resources.Map);
             Width = map_image.Width;
             Height = map_image.Height;
 
             Tile = Settings.sHeight / Height;
 
             for (int y = 0; y < Height; y++)
-                for (int x =0; x < Width; y++)
+                for (int x = 0; x < Width; x++)
                 {
                     var pixel = map_image.GetPixel(x, y);
                     if (pixel != Color.White && pixel != Color.Transparent)
