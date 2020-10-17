@@ -37,7 +37,7 @@
             // 
             // Clock
             // 
-            this.Clock.Interval = 15;
+            this.Clock.Interval = 1;
             this.Clock.Tick += new System.EventHandler(this.Clock_Tick);
             // 
             // FPS_Text
@@ -47,7 +47,7 @@
             this.FPS_Text.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FPS_Text.Font = new System.Drawing.Font("Lucida Console", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FPS_Text.ForeColor = System.Drawing.Color.Red;
-            this.FPS_Text.Location = new System.Drawing.Point(12, 9);
+            this.FPS_Text.Location = new System.Drawing.Point(727, 9);
             this.FPS_Text.Name = "FPS_Text";
             this.FPS_Text.Size = new System.Drawing.Size(61, 37);
             this.FPS_Text.TabIndex = 0;
