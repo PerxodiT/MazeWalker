@@ -32,30 +32,34 @@ namespace MazeWalker
             return c;
         }
         
-        public float Ray(float px, float py, double angle)
+        public float Ray(float px, float py, double angle, out Color color)
         {
             int x, y;
             float sin_ang = (float)Math.Sin(angle);
             float cos_ang = (float)Math.Cos(angle);
-            sin_ang = sin_ang == 0 ? 0.0000001F : sin_ang;
-            cos_ang = cos_ang == 0 ? 0.0000001F : cos_ang;
+            sin_ang = sin_ang == 0 ? 0.0001F : sin_ang;
+            cos_ang = cos_ang == 0 ? 0.0001F : cos_ang;
 
             int dirX;
             int dirY;
-            
 
             // Dist fo x's
             // Selecting direction
             dirX = cos_ang >= 0 ? 1 : -1;
             dirY = sin_ang >= 0 ? 1 : -1;
             int mx = dirX == 1 ? (int)px + 1 : (int)px; 
-            int my = dirY == 1 ? (int)py + 1 : (int)py; 
+            int my = dirY == 1 ? (int)py + 1 : (int)py;
 
-            float sideDistX = Math.Abs(mx - px) / cos_ang;
+            
+
+            float sideDistX = (mx - px) / cos_ang;
             float deltaDistX = 1 / cos_ang;
             float distX;
             x = (int)((px + sideDistX * cos_ang) + (dirX * 0.001F));
             y = (int)((py + sideDistX * sin_ang) + (dirY * 0.001F));
+
+            sideDistX = Math.Abs(sideDistX);
+            deltaDistX = Math.Abs(deltaDistX);
 
             if (Map.Walls.ContainsKey(Map.Coord(x, y)))
                 distX = sideDistX;
@@ -81,6 +85,9 @@ namespace MazeWalker
             x = (int)((px + sideDistY * cos_ang) + (dirX * 0.01F));
             y = (int)((py + sideDistY * sin_ang) + (dirY * 0.01F));
 
+            sideDistY = Math.Abs(sideDistY);
+            deltaDistY = Math.Abs(deltaDistY);
+
             if (Map.Walls.ContainsKey(Map.Coord(x, y)))
                 distY = sideDistY;
             else if (deltaDistX > Map.DiagLen)
@@ -96,6 +103,12 @@ namespace MazeWalker
                     if (Map.Walls.ContainsKey(Map.Coord(x, y))) break;
                 }
             }
+
+            color = default;
+            if (dirX == 1 && dirY == 1) color = Color.Green;
+            else if (dirX == -1 && dirY == 1) color = Color.Blue;
+            else if (dirX == -1 && dirY == -1) color = Color.Red;
+            else if (dirX == 1 && dirY == -1) color = Color.DarkViolet;
             return distX < distY ? distX : distY;
         }
     }

@@ -78,18 +78,20 @@ namespace MazeWalker
                 (float)(x * c), (float)(y * c),
                 (float)((x + Math.Cos(a)) * c), (float)((y + Math.Sin(a)) * c));
 
-            
-            for (double angle = a - Settings.Half_FOV, i = 0;
-                angle < a + Settings.Half_FOV;
-                angle += Settings.deltaFOV, i++)
-            {
-                float dist = RayCast.Ray((float)x, (float)y, angle);
+
+            //for (double angle = a - Settings.Half_FOV, i = 0;
+            //    angle < a + Settings.Half_FOV;
+            //    angle += Settings.deltaFOV, i++)
+            //{
+            double angle = a;
+                Color color = Color.White;
+                float dist = RayCast.Ray((float)x, (float)y, angle, out color);
                 float rx = (float)(x + dist * Math.Cos(angle));
                 float ry = (float)(y + dist * Math.Sin(angle));
 
-                if (i % 3 == 0)
-                g.DrawLine(Pens.Red, (float)(x * c), (float)(y * c), rx * c, ry * c);
-            }
+                //if (i % 3 == 0)
+                g.DrawLine(new Pen(color, 3), (float)(x * c), (float)(y * c), rx * c, ry * c);
+            //}
         }
     }
 }
