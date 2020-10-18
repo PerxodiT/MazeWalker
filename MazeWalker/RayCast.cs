@@ -32,7 +32,7 @@ namespace MazeWalker
             return c;
         }
         
-        public float Ray(float px, float py, double angle, out Color color)
+        public float Ray(float px, float py, double angle)
         {
             int x, y;
             float sin_ang = (float)Math.Sin(angle);
@@ -82,20 +82,20 @@ namespace MazeWalker
             float sideDistY = (my - py) / sin_ang;
             float deltaDistY = 1 / sin_ang;
             float distY;
-            x = (int)((px + sideDistY * cos_ang) + (dirX * 0.01F));
-            y = (int)((py + sideDistY * sin_ang) + (dirY * 0.01F));
+            x = (int)((px + sideDistY * cos_ang) + (dirX * 0.001F));
+            y = (int)((py + sideDistY * sin_ang) + (dirY * 0.001F));
 
             sideDistY = Math.Abs(sideDistY);
             deltaDistY = Math.Abs(deltaDistY);
 
             if (Map.Walls.ContainsKey(Map.Coord(x, y)))
                 distY = sideDistY;
-            else if (deltaDistX > Map.DiagLen)
+            else if (deltaDistY > Map.DiagLen)
                 distY = (float)Map.DiagLen; //When intersects outside the map dist = MaxDist
             else
             {
                 distY = sideDistY;
-                for (int y2 = y; y2 > 0 && y2 < Map.Height; y2 += dirY)
+                for (int y2 = y; y2 > 0 && y2 < Map.Width; y2 += dirY)
                 {
                     distY += deltaDistY;
                     x = (int)((px + distY * cos_ang) + (dirX * 0.01F));
@@ -104,11 +104,6 @@ namespace MazeWalker
                 }
             }
 
-            color = default;
-            if (dirX == 1 && dirY == 1) color = Color.Green;
-            else if (dirX == -1 && dirY == 1) color = Color.Blue;
-            else if (dirX == -1 && dirY == -1) color = Color.Red;
-            else if (dirX == 1 && dirY == -1) color = Color.DarkViolet;
             return distX < distY ? distX : distY;
         }
     }
