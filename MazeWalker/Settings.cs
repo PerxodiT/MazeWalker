@@ -26,5 +26,8 @@ namespace MazeWalker
         public const double PlayerSpeed = 2;
         public const float Scale = sWidth / RAY_COUNT;
         public static float Camera_Dist = (float)(sWidth / (2 * Math.Tan(FOV / 2)));
+
+        public static int mCellsX = 25;
+        public static int mCellsY = 25;
     }
 }

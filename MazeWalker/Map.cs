@@ -30,9 +30,10 @@ namespace MazeWalker
 
         public Map()
         {
-
+            Maze maze = new Maze(12, 12);
+            maze.Generate(0, 0);
             Dictionary<Coord, Color> walls = new Dictionary<Coord, Color> { };
-            Bitmap map_image = new Bitmap(Properties.Resources.Map);
+            Bitmap map_image = (Bitmap)MazeDrawer.Draw(maze).Clone();
             Width = map_image.Width;
             Height = map_image.Height;
             DiagLen = Math.Sqrt(Width * Width + Height * Height);
