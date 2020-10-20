@@ -61,6 +61,7 @@
             this.Screen.Size = new System.Drawing.Size(800, 600);
             this.Screen.TabIndex = 1;
             this.Screen.TabStop = false;
+            this.Screen.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Screen_MouseMove);
             // 
             // FpsCounter
             // 
