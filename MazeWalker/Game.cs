@@ -26,7 +26,7 @@ namespace MazeWalker
         {
             g = Graphics.FromImage(buf);
             Clock.Enabled = true;
-            Player = new Player(5, 5, Map);
+            Player = new Player(1.5F, 1.5F, Map);
 
         }
         private void Game_KeyPress(object sender, KeyPressEventArgs e)
@@ -41,20 +41,26 @@ namespace MazeWalker
         private void Draw()
         {
             g.Clear(Color.FromArgb(255, 0, 150, 255));
-            Map.Draw(g);
             Player.Draw(g);
+            g.FillRectangle(Brushes.White, 0, 0, Map.Width * Map.Tile, Map.Height * Map.Tile);
+            Map.Draw(g);
+            Player.DrawOnMap(g);
         }
 
-        const double min_frametime = 1 / 60;
+        string FPS = "0";
         private void Clock_Tick(object sender, EventArgs e)
         {
             time = DateTime.Now;
             Draw();
-
             Screen.Image = buf;
             Screen.Update();
             frame_time = (DateTime.Now - time).TotalSeconds;
-            FPS_Text.Text = ((int)(1/frame_time)).ToString();
+            FPS = ((int)(1/frame_time)).ToString();
+        }
+
+        private void FpsCounter_Tick(object sender, EventArgs e)
+        {
+            FPS_Text.Text = FPS;
         }
         //===================================================
     }

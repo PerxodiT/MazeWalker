@@ -32,6 +32,7 @@
             this.Clock = new System.Windows.Forms.Timer(this.components);
             this.FPS_Text = new System.Windows.Forms.Label();
             this.Screen = new System.Windows.Forms.PictureBox();
+            this.FpsCounter = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Screen)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +62,12 @@
             this.Screen.TabIndex = 1;
             this.Screen.TabStop = false;
             // 
+            // FpsCounter
+            // 
+            this.FpsCounter.Enabled = true;
+            this.FpsCounter.Interval = 1000;
+            this.FpsCounter.Tick += new System.EventHandler(this.FpsCounter_Tick);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -70,6 +77,7 @@
             this.Controls.Add(this.Screen);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Game";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Game";
             this.Load += new System.EventHandler(this.Game_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Game_KeyDown);
@@ -85,6 +93,7 @@
         private System.Windows.Forms.Timer Clock;
         private System.Windows.Forms.Label FPS_Text;
         private System.Windows.Forms.PictureBox Screen;
+        private System.Windows.Forms.Timer FpsCounter;
     }
 }
 

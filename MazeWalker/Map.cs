@@ -37,7 +37,7 @@ namespace MazeWalker
             Height = map_image.Height;
             DiagLen = Math.Sqrt(Width * Width + Height * Height);
 
-            Tile = Settings.sHeight / Height;
+            Tile = Settings.mHeight / Height;
 
             for (int y = 0; y < Height; y++)
                 for (int x = 0; x < Width; x++)
